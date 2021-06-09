@@ -9,6 +9,8 @@
 population-health-designer
 population-health-designer.*
 bin/*.*
+bin/phd*
+bin/population-health-designer*
 
 # Test binary, built with `go test -c`
 *.test
