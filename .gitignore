@@ -8,9 +8,10 @@
 # Project binaries
 population-health-designer
 population-health-designer.*
-bin/*.*
 bin/phd*
+bin/*.*
 bin/population-health-designer*
+!bin/.git*
 
 # Test binary, built with `go test -c`
 *.test
