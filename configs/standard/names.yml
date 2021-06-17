@@ -1,0 +1,13 @@
+names:
+   masculine:
+    - given:
+       - Victor
+       - X.
+      family: Frankenstein
+    - given:
+       - Vlad
+      family: Dracul
+   feminine:
+    - given:
+       - Jane
+      family: Doe

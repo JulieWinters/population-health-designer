@@ -1,0 +1,21 @@
+addresses:
+  residential:
+    - city: Townville
+      state: MN
+      postal_mask: 9900*
+      street_range: 1-60
+      building_number_range: 100-6000
+      apt_percentage: .33
+    - city: Someplacington
+      state: MN
+      postal_mask: 990*9
+      street_range: 1-20
+      building_number_range: 10-200
+      apt_percentage: .1
+  commercial:
+    - city: Townville
+      state: MN
+      postal_mask: 9900*
+      street_range: 1-30
+      building_number_range: 10-100
+        

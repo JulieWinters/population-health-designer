@@ -1,0 +1,34 @@
+inherit: 
+  - ./configs/standard/names.yml
+  - ./configs/standard/addresses.yml
+rules:
+  counts:
+    patients: 200
+    providers: 0    
+  output: ./bin/patients.yml
+distributions:
+  race: 
+    american_indian_or_alaska_native: .2
+    black_or_african_american: .2
+    asian: .2
+    native_hawaiian_or_pacific_islander: .2
+    white: .2
+  ethnicity:
+    hispanic_or_latino: .33
+    non_hispanic_or_latino: .67
+  sexuality:
+      homosexual: .0165
+      bi: .018
+  gender_identity:
+    trans: .00198
+    nonbinary: .00099
+  ages:
+    0to4: .068
+    5to17: .189
+    18to24: .096
+    25to44: .302
+    45to64: .22
+    65plus: .124
+  
+
+    
