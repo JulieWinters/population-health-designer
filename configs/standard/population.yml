@@ -3,7 +3,7 @@ inherit:
   - ./configs/standard/addresses.yml
 rules:
   counts:
-    patients: 200
+    patients: 2
     providers: 0    
   output: ./bin/patients.yml
 distributions:

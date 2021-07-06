@@ -5,22 +5,22 @@ import (
 	"time"
 )
 
-var raceMap = make(map[float32]string)
-var raceMapKeys = make([]float32, 0)
+var RaceMap = make(map[float32]string)
+var RaceMapKeys = make([]float32, 0)
 
-var ethnicityMap = make(map[float32]string)
-var ethnicityMapKeys = make([]float32, 0)
+var EthnicityMap = make(map[float32]string)
+var EthnicityMapKeys = make([]float32, 0)
 
-var sexualityMap = make(map[float32]string)
-var sexualityMapKeys = make([]float32, 0)
+var SexualityMap = make(map[float32]string)
+var SexualityMapKeys = make([]float32, 0)
 
-var genderIdentityMap = make(map[float32]string)
-var genderIdentityMapKeys = make([]float32, 0)
+var GenderIdentityMap = make(map[float32]string)
+var GenderIdentityMapKeys = make([]float32, 0)
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-func randFloat() float32 {
+func RandFloat() float32 {
 	return rand.Float32()
 }

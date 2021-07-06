@@ -9,10 +9,9 @@ import (
 
 func Execute(configFile string) (string, error) {
 
-	popStat, err := config.Parse(configFile)
-	if err != nil {
-		return "", err
-	}
+	// var popStat PopStats
+	// popStat.Parse(configFile)
+	popStat := Parse(configFile)
 
 	// fmt.Printf("Random race for new patient: %v\n", popStat.Distributions.RandRace())
 	// fmt.Printf("Random ethnicity for new patient: %v\n", popStat.Distributions.RandEthnicity())
