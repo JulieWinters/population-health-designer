@@ -1,8 +1,10 @@
 package modeling
 
 type Person struct {
-	Name    Name `yaml:"name,omitempty"`
-	Address struct {
+	Identifier string `yaml:"string"`
+	Name       Name   `yaml:"name,omitempty"`
+	Birthdate  string `yaml:"birthdate,omitempty"`
+	Address    struct {
 		Primary   Address `yaml:"primary,omitempty"`
 		Temporary Address `yaml:"temporary,omitempty"`
 	}
