@@ -9,7 +9,8 @@ import (
 
 func Execute(configFile string) (string, error) {
 
-	popStat := ParsePopStatus(configFile)
+	//popStat := ParsePopStatus(configFile)
+	popStat, _ := Parse(configFile)
 
 	patients := make([]modeling.Person, popStat.Rules.Counts.Patients)
 	for i := 0; i < popStat.Rules.Counts.Patients; i++ {

@@ -9,20 +9,26 @@ import (
 )
 
 const (
-	MAX_AGE = 110
+	MAX_AGE     = 110
+	UPPER_INDEX = 65
+	LOWER_INDEX = 97
 )
 
-var raceMap = make(map[float32]string)
-var raceMapKeys = make([]float32, 0)
+var RaceMap = make(map[float32]string)
+var RaceMapKeys = make([]float32, 0)
 
-var ethnicityMap = make(map[float32]string)
-var ethnicityMapKeys = make([]float32, 0)
+var EthnicityMap = make(map[float32]string)
+var EthnicityMapKeys = make([]float32, 0)
 
-var sexualityMap = make(map[float32]string)
-var sexualityMapKeys = make([]float32, 0)
+var SexualityMap = make(map[float32]string)
+var SexualityMapKeys = make([]float32, 0)
 
-var genderIdentityMap = make(map[float32]string)
-var genderIdentityMapKeys = make([]float32, 0)
+var GenderIdentityMap = make(map[float32]string)
+var GenderIdentityMapKeys = make([]float32, 0)
+
+type Configuration struct {
+	Inherit []string `yaml:"inherit"`
+}
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
@@ -36,8 +42,34 @@ func RandInt(l int, h int) int {
 	return rand.Intn(h-l) + l
 }
 
-type Configuration struct {
-	Inherit []string `yaml:"inherit"`
+func RandMaskValue(mask string) string {
+	value := ""
+	for _, c := range mask {
+		if c == '#' {
+			value += fmt.Sprintf("%v", RandInt(0, 10))
+		} else if c == '?' {
+			switch RandInt(0, 1) {
+			case 0:
+				value += fmt.Sprintf("%c", (UPPER_INDEX + RandInt(0, 25)))
+			case 1:
+				value += fmt.Sprintf("%c", (LOWER_INDEX + RandInt(0, 25)))
+			}
+		} else if c == '*' {
+			switch RandInt(0, 2) {
+			case 0:
+				value += fmt.Sprintf("%v", RandInt(0, 10))
+			case 1:
+				value += fmt.Sprintf("%c", (UPPER_INDEX + RandInt(0, 25)))
+			case 2:
+				value += fmt.Sprintf("%c", (LOWER_INDEX + RandInt(0, 25)))
+			}
+
+			value += fmt.Sprintf("%v", RandInt(0, 10))
+		} else {
+			value += string(c)
+		}
+	}
+	return value
 }
 
 // General helpers

@@ -21,3 +21,16 @@ func Write(data interface{}, file string) error {
 
 	return nil
 }
+
+func Parse(file string, out interface{}) {
+
+	data, err := ioutil.ReadFile(file)
+	if err != nil {
+		panic(err)
+	}
+
+	err = yaml.Unmarshal(data, out)
+	if err != nil {
+		panic(err)
+	}
+}
