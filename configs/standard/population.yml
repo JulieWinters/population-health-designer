@@ -1,11 +1,17 @@
 inherit: 
   - ./configs/standard/names.yml
   - ./configs/standard/addresses.yml
+  - ./configs/standard/conditions.yml
 rules:
   counts:
-    patients: 2
+    patients: 5
     providers: 0    
   output: ./bin/patients.yml
+identifiers:
+  - mask: "#######"
+    type: PAT_MRN
+  - mask: "###-##-####"
+    type: SSN
 distributions:
   race: 
     american_indian_or_alaska_native: .2
@@ -18,17 +24,17 @@ distributions:
     non_hispanic_or_latino: .67
   sexuality:
       homosexual: .0165
-      bi: .018
+      bisexual: .018
   gender_identity:
     trans: .00198
     nonbinary: .00099
   ages:
-    0to4: .068
-    5to17: .189
-    18to24: .096
-    25to44: .302
-    45to64: .22
-    65plus: .124
+    0-4: .068
+    5-17: .189
+    18-24: .096
+    25-44: .302
+    45-64: .22
+    65+: .125
   
 
     
