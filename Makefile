@@ -4,4 +4,4 @@ build:
 	GO111MODULE=on go build -o bin/${APPNAME} main.go
 
 clean:
-	rm bin/${APPNAME}*
+	rm bin/${APPNAME}* bin/*.yml
