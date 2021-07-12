@@ -12,6 +12,13 @@ const (
 	MAX_AGE     = 110
 	UPPER_INDEX = 65
 	LOWER_INDEX = 97
+
+	NANOS_PER_MINUTE = 60000000000
+	NANOS_PER_HOUR   = 3600000000000
+	NANOS_PER_DAY    = 86400000000000
+	NANOS_PER_WEEK   = 604800000000000
+	NANOS_PER_MONTH  = 2592000000000000
+	NANOS_PER_YEAR   = 31556952000000000
 )
 
 var RaceMap = make(map[float32]string)
@@ -26,6 +33,14 @@ var SexualityMapKeys = make([]float32, 0)
 var GenderIdentityMap = make(map[float32]string)
 var GenderIdentityMapKeys = make([]float32, 0)
 
+var AgeMap = make(map[float32]string)
+var AgeMapKeys = make([]float32, 0)
+
+type Code struct {
+	System string `yaml:"system,omitempty"`
+	Value  string `yaml:"value,omitempty"`
+}
+
 type Configuration struct {
 	Inherit []string `yaml:"inherit"`
 }
@@ -38,8 +53,26 @@ func RandFloat() float32 {
 	return rand.Float32()
 }
 
+func RandFloat64() float64 {
+	return rand.Float64()
+}
+
 func RandInt(l int, h int) int {
+	if h < l {
+		return 0
+	} else if h == l {
+		return l
+	}
 	return rand.Intn(h-l) + l
+}
+
+func RandInt64(l int64, h int64) int64 {
+	if h < l {
+		return 0
+	} else if h == l {
+		return l
+	}
+	return rand.Int63n(h-l) + l
 }
 
 func RandMaskValue(mask string) string {
@@ -98,4 +131,35 @@ func SplitRange(rnge string) (int, int) {
 	}
 
 	return int(low), int(high)
+}
+
+func WindowRange(window string) time.Duration {
+	var dur time.Duration
+	dur = -1
+	if window[len(window)-1] != '+' && !strings.Contains(window, "-") {
+		window = strings.TrimRight(window, "+")
+		unit := window[len(window)-1]
+		quant := window[0 : len(window)-1]
+		val, err := strconv.ParseInt(quant, 32, 0)
+		if err != nil {
+			panic(err)
+		}
+		switch unit {
+		case 'h':
+			dur = time.Duration(RandInt64(NANOS_PER_MINUTE, val*NANOS_PER_HOUR))
+		case 'd':
+			dur = time.Duration(RandInt64(NANOS_PER_HOUR, val*NANOS_PER_DAY))
+		case 'w':
+			dur = time.Duration(RandInt64(NANOS_PER_DAY, val*NANOS_PER_WEEK))
+		case 'm':
+			dur = time.Duration(RandInt64(NANOS_PER_WEEK, val*NANOS_PER_MONTH))
+		case 'y':
+			dur = time.Duration(RandInt64(NANOS_PER_MONTH, val*NANOS_PER_YEAR))
+		}
+	}
+
+	if dur == -1 {
+		panic("Malformed window")
+	}
+	return dur
 }

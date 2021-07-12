@@ -2,6 +2,7 @@ package modeling
 
 import (
 	"sort"
+	"time"
 
 	"github.com/JulieWinters/population-health-designer/internal/config"
 )
@@ -30,6 +31,7 @@ type Distributions struct {
 	Ethnicity      map[string]float32 `yaml:"ethnicity"`
 	Sexuality      map[string]float32 `yaml:"sexuality"`
 	GenderIdentity map[string]float32 `yaml:"gender_identity"`
+	Ages           map[string]float32 `yaml:"ages"`
 }
 
 type Identifier struct {
@@ -46,21 +48,28 @@ type Rules struct {
 }
 
 type PopStats struct {
-	Inherit       []string     `yaml:"inherit"`
-	Rules         Rules        `yaml:"rules"`
-	Identifiers   []Identifier `yaml:"identifiers"`
-	Distributions Distributions
-	Names         Names
-	Addresses     Addresses
+	Inherit       []string      `yaml:"inherit"`
+	Rules         Rules         `yaml:"rules"`
+	Identifiers   []Identifier  `yaml:"identifiers"`
+	Distributions Distributions `yaml:"distributions"`
+	Names         Names         `yaml:"names"`
+	Addresses     Addresses     `yaml:"addresses"`
+	Diagnoses     []Diagnosis   `yaml:"diagnoses"`
 }
 
 func (stats *PopStats) NewPatient() Person {
 
 	patient := Person{}
-	patient.Identifier = make([]Code, 0)
+	patient.Identifier = make([]config.Code, 0)
 	patient.Details = make(map[string]string)
 
-	patient.Name = stats.Names.RandMasculine()
+	if config.RandFloat() > .5 {
+		patient.Gender = "F"
+		patient.Name = stats.Names.RandFeminine()
+	} else {
+		patient.Gender = "M"
+		patient.Name = stats.Names.RandMasculine()
+	}
 	patient.Address.Primary = stats.Addresses.RandResidential()
 
 	temp := stats.Distributions.RandGender()
@@ -83,8 +92,17 @@ func (stats *PopStats) NewPatient() Person {
 		patient.Details["race"] = temp
 	}
 
+	age := stats.Distributions.RandAge()
+	dob := time.Now()
+	year := -1 * age
+	day := config.RandInt(dob.YearDay(), 366)
+	month := -1 * (day / 30)
+	day = -1 * (day % 30)
+	dob = dob.AddDate(year, month, day)
+	patient.Birthdate = dob.Format("2006-01-02")
+
 	for _, id := range stats.Identifiers {
-		patId := Code{Value: config.RandMaskValue(id.Mask), System: id.Type}
+		patId := config.Code{Value: config.RandMaskValue(id.Mask), System: id.Type}
 		patient.Identifier = append(patient.Identifier, patId)
 	}
 
@@ -106,6 +124,15 @@ func (dist *Distributions) RandSexuality() string {
 
 func (dist *Distributions) RandGender() string {
 	return randDistItem(dist.GenderIdentity, config.GenderIdentityMap, &config.GenderIdentityMapKeys, "")
+}
+
+func (dist *Distributions) RandAge() int {
+	rng := randDistItem(dist.Ages, config.AgeMap, &config.AgeMapKeys, "")
+	l, h := config.SplitRange(rng)
+	if h < 0 {
+		h = config.MAX_AGE
+	}
+	return config.RandInt(l, h)
 }
 
 // functions for generating names

@@ -65,4 +65,9 @@ func mergeConfigs(child *modeling.PopStats, parent *modeling.PopStats) {
 	if len(parent.Addresses.Commercial) != 0 && len(child.Addresses.Commercial) == 0 {
 		child.Addresses.Commercial = parent.Addresses.Commercial
 	}
+
+	// Diagnoses
+	if len(parent.Diagnoses) != 0 && len(child.Diagnoses) == 0 {
+		child.Diagnoses = parent.Diagnoses
+	}
 }

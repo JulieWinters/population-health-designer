@@ -1,10 +1,10 @@
 inherit: 
   - ./configs/standard/names.yml
   - ./configs/standard/addresses.yml
-  - ./configs/standard/conditions.yml
+  - ./configs/standard/diagnoses.yml
 rules:
   counts:
-    patients: 5
+    patients: 100
     providers: 0    
   output: ./bin/patients.yml
 identifiers:

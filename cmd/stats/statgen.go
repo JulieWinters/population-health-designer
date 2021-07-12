@@ -16,6 +16,11 @@ func Execute(configFile string) (string, error) {
 	for i := 0; i < popStat.Rules.Counts.Patients; i++ {
 		patients[i] = popStat.NewPatient()
 	}
+
+	for _, c := range popStat.Diagnoses {
+		c.Manifest(patients)
+	}
+
 	config.Write(patients, popStat.Rules.Output)
 
 	return fmt.Sprintf("ECHO '%v'", configFile), nil

@@ -1,6 +1,9 @@
 names:
    masculine:
     - given:
+       - Ash
+      family: Williams
+    - given:
        - Victor
       family: Frankenstein
     - given:
@@ -129,3 +132,6 @@ names:
     - given:
       - April
       family: O'Neil
+    - given:
+      - Samantha
+      family: Stephens
