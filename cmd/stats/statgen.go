@@ -7,6 +7,7 @@ import (
 	"github.com/JulieWinters/population-health-designer/internal/modeling"
 )
 
+// Executes the population data generation process
 func Execute(configFile string) (string, error) {
 
 	//popStat := ParsePopStatus(configFile)
