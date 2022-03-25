@@ -20,7 +20,7 @@ type Diagnosis struct {
 	Nature          string   `yaml:"nature"`
 }
 
-func (diag *Diagnosis) Manifest(population []Person) {
+func (diag *Diagnosis) Manifest(population []Person) (int) {	
 	ages := make([][2]int, len(diag.OnsetAges))
 	for i, r := range diag.OnsetAges {
 		low, high := config.SplitRange(r)
@@ -43,7 +43,7 @@ func (diag *Diagnosis) Manifest(population []Person) {
 		if h == -1 {
 			h = config.MAX_AGE
 		}
-		patAge := population[p].age()
+		patAge := population[p].Age()
 		if h > patAge {
 			h = patAge
 		}
@@ -62,6 +62,7 @@ func (diag *Diagnosis) Manifest(population []Person) {
 		}
 		population[p].Conditions = append(population[p].Conditions, condition)
 	}
+	return len(pats)
 }
 
 func findPats(commonality float32, ages [][2]int, population []Person) []int {

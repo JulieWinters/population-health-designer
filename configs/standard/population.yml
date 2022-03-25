@@ -4,7 +4,7 @@ inherit:
   - ./configs/standard/diagnoses.yml
 rules:
   counts:
-    patients: 100
+    patients: 10
     providers: 0    
   output: ./bin/patients.yml
 identifiers:

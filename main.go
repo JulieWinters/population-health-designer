@@ -26,11 +26,8 @@ func main() {
 
 	var message string
 	if val, ok := actions[STATS]; ok {
-		message, err = stats.Execute(val)
-	}
-	if err != nil {
-		fmt.Printf("Failed in Population Statistics step: %v\n", err)
-		return
+		stats.Execute(val)
+		fmt.Println("Population Stats done generating")
 	}
 
 	if val, ok := actions[EVENTS]; ok {

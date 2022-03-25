@@ -14,10 +14,12 @@ func Parse(file string) (modeling.PopStats, error) {
 	config.Parse(file, &out)
 
 	if len(out.Inherit) > 0 {
-		fmt.Printf("Inheritance for %v: %v\n", file, len(out.Inherit))
+
+		fmt.Printf("Inheriting from (%v):\n", len(out.Inherit))
 		for i := len(out.Inherit) - 1; i >= 0; i-- {
 
 			// Parse the inherited config
+			fmt.Printf("  Reading inheritance from %v\n", out.Inherit[i])
 			parent, err := Parse(out.Inherit[i])
 			if err != nil {
 				return out, err

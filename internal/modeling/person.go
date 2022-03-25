@@ -36,7 +36,11 @@ type Condition struct {
 	Terminal bool `yaml:"terminal"`
 }
 
-func (person *Person) age() int {
+func (person *Person) Age() int {
+	return person.AgeAt(time.Now().Format("2006-01-02"))
+}
+
+func (person *Person) AgeAt(date string) int {
 	if person.Birthdate == "" {
 		return 0
 	}
@@ -44,5 +48,25 @@ func (person *Person) age() int {
 	if err != nil {
 		panic(err)
 	}
-	return int(math.Floor(time.Now().Sub(dob).Hours() / float64(8760)))
+	when, err := time.Parse("2006-01-02", date)
+	if err != nil {
+		panic(err)
+	}
+	return int(math.Floor(when.Sub(dob).Hours() / float64(8760)))
+}
+
+func (person *Person) ConditionsBetween(start string, end string) []*Condition {
+
+	found := make([]*Condition, 0)
+
+	ageStart := person.AgeAt(start)
+	ageEnd := person.AgeAt(end)
+
+	for _, cond := range person.Conditions {
+		if ageEnd <= cond.OnsetAge || cond.OnsetAge <= ageStart {
+			found = append(found, &cond)
+		}
+	}
+
+	return found
 }
