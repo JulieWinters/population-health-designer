@@ -7,6 +7,11 @@ import (
 	"github.com/JulieWinters/population-health-designer/internal/config"
 )
 
+type Patient struct {
+	Demographics Person      `yaml:"demographics"`
+	Conditions   []Condition `yaml:"conditions,omitempty"`
+}
+
 type Person struct {
 	Identifier []config.Code `yaml:"identifier,omitempty"`
 	Name       Name          `yaml:"name,omitempty"`
@@ -17,23 +22,12 @@ type Person struct {
 		Primary   Address `yaml:"primary,omitempty"`
 		Temporary Address `yaml:"temporary,omitempty"`
 	}
-	Details    map[string]string `yaml:"details,omitempty"`
-	Conditions []Condition       `yaml:"conditions,omitempty"`
+	Details map[string]string `yaml:"details,omitempty"`
 }
 
 type Name struct {
 	Given  []string `yaml:"given,omitempty"`
 	Family string   `yaml:"family,omitempty"`
-}
-
-type Condition struct {
-	Name string `yaml:"name"`
-	Code struct {
-		System string `yaml:"system"`
-		Value  string `yaml:"value"`
-	}
-	OnsetAge int  `yaml:"onset_age"`
-	Terminal bool `yaml:"terminal"`
 }
 
 func (person *Person) Age() int {
@@ -55,12 +49,12 @@ func (person *Person) AgeAt(date string) int {
 	return int(math.Floor(when.Sub(dob).Hours() / float64(8760)))
 }
 
-func (person *Person) ConditionsBetween(start string, end string) []*Condition {
+func (person *Patient) ConditionsBetween(start string, end string) []*Condition {
 
 	found := make([]*Condition, 0)
 
-	ageStart := person.AgeAt(start)
-	ageEnd := person.AgeAt(end)
+	ageStart := person.Demographics.AgeAt(start)
+	ageEnd := person.Demographics.AgeAt(end)
 
 	for _, cond := range person.Conditions {
 		if ageEnd <= cond.OnsetAge || cond.OnsetAge <= ageStart {

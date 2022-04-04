@@ -26,24 +26,27 @@ func main() {
 
 	var message string
 	if val, ok := actions[STATS]; ok {
-		stats.Execute(val)
-		fmt.Println("Population Stats done generating")
+		err := stats.Execute(val)
+		if err != nil {			
+			fmt.Printf("Failed in Population Statistics step: %v\n", err)
+			return
+		}
 	}
 
 	if val, ok := actions[EVENTS]; ok {
-		message, err = events.Execute(val)
-	}
-	if err != nil {
-		fmt.Printf("Failed in Event Generation step: %v\n", err)
-		return
+		err = events.Execute(val)
+		if err != nil {
+			fmt.Printf("Failed in Event Generation step: %v\n", err)
+			return
+		}
 	}
 
 	if val, ok := actions[MAPS]; ok {
 		message, err = maps.Execute(val)
-	}
-	if err != nil {
-		fmt.Printf("Failed in Event Data Mapping step: %v\n", err)
-		return
+		if err != nil {
+			fmt.Printf("Failed in Event Data Mapping step: %v\n", err)
+			return
+		}
 	}
 
 	fmt.Println(message)

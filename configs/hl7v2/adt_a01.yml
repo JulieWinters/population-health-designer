@@ -1,0 +1,25 @@
+type: ADT
+event: A01
+segments:
+  - type: MSH
+    cardinality: 1..1
+  - type: EVN
+    cardinality: 1..1
+  - type: PID
+    cardinality: 1..1
+  - type: ZPD
+    cardinality: 0..1
+  - type: PD1
+    cardinality: 0..1
+  - type: PV1
+    cardinality: 0..1
+  - type: PV2
+    cardinality: 0..1
+  - type: ZPV
+    cardinality: 0..1
+  - type: ZIF
+    cardinality: 0..1
+  - type: DG1
+    cardinality: 0..1
+  - type: AL1
+    cardinality: 0..*

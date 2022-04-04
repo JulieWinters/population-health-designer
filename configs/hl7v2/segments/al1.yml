@@ -1,0 +1,31 @@
+id: AL1
+repetition_key: "patient.conditions[?(@.type=='allergy')]"
+fields:
+  - name: sequence
+    cardinality: 1..1
+    values: 
+      - "{meta.sequence}"
+  - name: type
+    cardinality: 0..1
+    values: 
+      - "Unknown"
+  - name: code
+    cardinality: 1..1
+    values: 
+      - ""
+      - "{code.description}"
+      - ""
+      - "{code.value}"
+      - "{code.description}"
+  - name: severity
+    cardinality: 0..1
+    values: 
+      - "TODO"
+  - name: reaction
+    cardinality: 0..1
+    values: 
+      - "TODO"
+  - name: onset
+    cardinality: 0..1
+    values: 
+      - "{onset_age}"

@@ -1,0 +1,14 @@
+stats: ./bin/patients.yml
+control_id:
+  seed: 100000
+  increment: 1
+segments:
+  - "./configs/hl7v2/segments/msh.yml"
+  - "./configs/hl7v2/segments/evn.yml"
+  - "./configs/hl7v2/segments/pid.yml"
+  - "./configs/hl7v2/segments/al1.yml"
+  - "./configs/hl7v2/segments/pd1.yml"
+  - "./configs/hl7v2/segments/pv1.yml"
+  - "./configs/hl7v2/segments/zpd.yml"
+messages:
+  - "./configs/hl7v2/adt_a01.yml"

@@ -1,0 +1,9 @@
+- name: "PHD TESTER"
+  use: primary
+  members:
+    - name: ADT_SENDER
+      messageTypes:
+        - ADT^A01
+        - ADT^A02
+        - ADT^A03
+        - ADT^A04

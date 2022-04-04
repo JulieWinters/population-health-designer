@@ -1,0 +1,44 @@
+id: EVN
+fields:
+  - name: type code
+    cardinality: 1..1
+    values: 
+      - "{meta.msg_trigger}"
+  - name: recorded date time
+    cardinality: 1..1
+    values: 
+      - "{meta.date_time}"
+  - name: planned date time
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: reason 
+    cardinality: 1..1
+    values: 
+      - "{meta.reason}"
+  - name: operator 
+    cardinality: 1..1
+    values:
+      - "{provider.id}"
+      - "{provider.name.family}"
+      - "{provider.name.given[0]}"
+      - "{provider.name.given[1:]}"
+      - "{provider.name.suffix}"
+      - "{provider.name.prefix}"
+      - "{provider.name.degree}"
+      - ""
+      - "{provider.system}"
+      - ""
+      - ""
+      - ""
+      - ""
+      - "{provider.facility}"
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""

@@ -1,0 +1,143 @@
+id: PID
+fields:
+  - name: set id
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: patient id
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: patient id list
+    cardinality: 1..*
+    values:
+      - "{patient.demographics.identifier[0].value}"
+      - ""
+      - ""
+      - "MC"
+      - "MC"
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+  - name: alt patient id
+    cardinality: 0..0
+  - name: patient name
+    cardinality: 1..*
+    values:
+      - "{patient.demographics.name.family}"
+      - "{patient.demographics.name.given[0]}"
+      - "{patient.demographics.name.given[1:]}"
+      - "{patient.demographics.name.suffix}"
+      - "{patient.demographics.name.prefix}"
+      - "{patient.demographics.name.degree}"
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+  - name: mother's maiden name
+    cardinality: 0..0
+  - name: birthdate
+    cardinality: 0..1
+    values: 
+      - "{patient.demographics.birthdate}"
+  - name: admin sex 
+    cardinality: 0..1
+    values: 
+      - "{patient.demographics.gender}"
+  - name: alias
+    cardinality: 0..*
+    values:
+      - "{patient.demographics.alias.family}"
+      - "{patient.demographics.alias.given[0]}"
+      - "{patient.demographics.alias.given[1:]}"
+      - "{patient.demographics.alias.suffix}"
+      - "{patient.demographics.alias.prefix}"
+      - "{patient.demographics.alias.degree}"
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+  - name: race 
+    cardinality: 0..1
+    values: 
+      - "{patient.demographics.details.race}"
+  - name: address 
+    cardinality: 0..*
+    values:
+      - "{patient.demographics.address.primary.street[0]}"
+      - "{patient.demographics.address.primary.street[1]}"
+      - "{patient.demographics.address.primary.city}"
+      - "{patient.demographics.address.primary.state}"
+      - "{patient.demographics.address.primary.postal_code}"
+      - "{patient.demographics.address.primary.country}"
+      - "L"
+      - ""
+      - "{patient.demographics.address.primary.county}"
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+  - name: county code 
+    cardinality: 0..1
+    values: 
+      - "{patient.demographics.address.primary.county}"
+  - name: primary phone
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: secondary phone
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: primary language
+    cardinality: 0..1
+    values: 
+      - "{patient.demographics.details.language[0]}"
+  - name: marital status
+    cardinality: 0..1
+    values: 
+      - "{patient.demographics.marital_status.code}"
+  - name: religion
+    cardinality: 0..1
+    values: 
+      - "{patient.demographics.religion.code}"
+  - name: account number
+    cardinality: 0..1
+    values: 
+      - "{event.id}"
+  - name: ssn
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: driver's license number
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: mother's identifier
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: ethnicity
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: birth place
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: multiple birth
+    cardinality: 0..1
+    values:
+      - "N"
+  

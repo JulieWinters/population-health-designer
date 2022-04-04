@@ -1,0 +1,90 @@
+id: ZPD
+fields:
+  - name: ancestry
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: pref communication
+    cardinality: 1..1
+    values: 
+      - "MYCH"
+  - name: multi birth total
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: my chart status
+    cardinality: 1..1
+    values: 
+      - "ACTIVE"
+  - name: study ids 
+    cardinality: 0..0
+    values:
+      - ""
+  - name: authed service areas
+    cardinality: 0..0
+    values:
+      - ""
+  - name: pregnancy flag
+    cardinality: 1..1
+    values:
+      - "N"
+  - name: delivery date
+    cardinality: 1..1
+    values:
+      - ""
+  - name: transplant flag
+    cardinality: 1..1
+    values:
+      - "N"
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: race/ethnicity id method
+    cardinality: 1..1
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: gender identity
+    cardinality: 1..1
+    values:
+      - "{patient.demographics.gender}"
+  - name: unused
+    cardinality: 0..0
+    values:
+      - ""
+  - name: sex assigned at birth
+    cardinality: 1..1
+    values:
+      - "{patient.demographics.gender}"

@@ -57,39 +57,39 @@ type PopStats struct {
 	Diagnoses     []Diagnosis   `yaml:"diagnoses"`
 }
 
-func (stats *PopStats) NewPatient() Person {
+func (stats *PopStats) NewPatient() Patient {
 
-	patient := Person{}
-	patient.Identifier = make([]config.Code, 0)
-	patient.Details = make(map[string]string)
+	person := Person{}
+	person.Identifier = make([]config.Code, 0)
+	person.Details = make(map[string]string)
 
 	if config.RandFloat() > .5 {
-		patient.Gender = "F"
-		patient.Name = stats.Names.RandFeminine()
+		person.Gender = "F"
+		person.Name = stats.Names.RandFeminine()
 	} else {
-		patient.Gender = "M"
-		patient.Name = stats.Names.RandMasculine()
+		person.Gender = "M"
+		person.Name = stats.Names.RandMasculine()
 	}
-	patient.Address.Primary = stats.Addresses.RandResidential()
+	person.Address.Primary = stats.Addresses.RandResidential()
 
 	temp := stats.Distributions.RandGender()
 	if temp != "" {
-		patient.Details["gender"] = temp
+		person.Details["gender"] = temp
 	}
 
 	temp = stats.Distributions.RandSexuality()
 	if temp != "" {
-		patient.Details["sexuality"] = temp
+		person.Details["sexuality"] = temp
 	}
 
 	temp = stats.Distributions.RandEthnicity()
 	if temp != "" {
-		patient.Details["ethnicity"] = temp
+		person.Details["ethnicity"] = temp
 	}
 
 	temp = stats.Distributions.RandRace()
 	if temp != "" {
-		patient.Details["race"] = temp
+		person.Details["race"] = temp
 	}
 
 	age := stats.Distributions.RandAge()
@@ -99,14 +99,14 @@ func (stats *PopStats) NewPatient() Person {
 	month := -1 * (day / 30)
 	day = -1 * (day % 30)
 	dob = dob.AddDate(year, month, day)
-	patient.Birthdate = dob.Format("2006-01-02")
+	person.Birthdate = dob.Format("2006-01-02")
 
 	for _, id := range stats.Identifiers {
 		patId := config.Code{Value: config.RandMaskValue(id.Mask), System: id.Type}
-		patient.Identifier = append(patient.Identifier, patId)
+		person.Identifier = append(person.Identifier, patId)
 	}
 
-	return patient
+	return Patient{Demographics: person}
 }
 
 // functions for generating demographic data

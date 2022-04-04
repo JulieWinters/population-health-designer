@@ -9,9 +9,14 @@ import (
 
 // Parse a PopStats structure from the yaml
 func Parse(file string) (modeling.PopStats, error) {
+	fmt.Print("Parsing Population Stats Generation")
+
 	var out modeling.PopStats
 
-	config.Parse(file, &out)
+	err := config.Parse(file, &out)
+	if err != nil {
+		return out, err
+	}
 
 	if len(out.Inherit) > 0 {
 

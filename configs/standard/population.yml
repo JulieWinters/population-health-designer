@@ -10,8 +10,6 @@ rules:
 identifiers:
   - mask: "#######"
     type: PAT_MRN
-  - mask: "###-##-####"
-    type: SSN
 distributions:
   race: 
     american_indian_or_alaska_native: .2

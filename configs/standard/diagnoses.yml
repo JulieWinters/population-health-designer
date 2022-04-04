@@ -3,12 +3,13 @@ diagnoses:
     code:
       system: ICD10
       value: K35
-    commonality: .05
+    commonality: .5
     onset_ages:
       - 5+
     mortality: .01
     mortality_window: 1w
     nature: once
+    type: problem
   - name: conjunctivitis
     code:
       system: ICD10
@@ -18,3 +19,4 @@ diagnoses:
       - 0+
     mortality: .0
     nature: reoccurring
+    type: problem

@@ -1,0 +1,250 @@
+id: PV1
+fields:
+  - name: set id
+    cardinality: 0..1
+    values: 
+      - "1"
+  - name: patient class
+    cardinality: 0..1
+    values: 
+      - "TBD"
+  - name: patient location
+    cardinality: 0..1
+    values: 
+      - "TBD"
+  - name: admission type
+    cardinality: 0..1
+    values: 
+      - "TBD"
+  - name: pre-admit number
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: prior patient location
+    cardinality: 0..1
+    values: 
+      - "TBD"
+  - name: attending
+    cardinality: 0..1
+    values: 
+      - "{provider.id}"
+      - "{provider.name.family}"
+      - "{provider.name.given[0]}"
+      - "{provider.name.given[1:]}"
+      - "{provider.name.suffix}"
+      - "{provider.name.prefix}"
+      - "{provider.name.degree}"
+      - ""
+      - ""
+      - "PROVID"
+      - ""
+      - ""
+      - ""
+      - "PROVID"
+  - name: referring
+    cardinality: 0..1
+    values: 
+      - "{provider.id}"
+      - "{provider.name.family}"
+      - "{provider.name.given[0]}"
+      - "{provider.name.given[1:]}"
+      - "{provider.name.suffix}"
+      - "{provider.name.prefix}"
+      - "{provider.name.degree}"
+      - ""
+      - ""
+      - "PROVID"
+      - ""
+      - ""
+      - ""
+      - "PROVID"
+  - name: consulting
+    cardinality: 0..1
+    values: 
+      - "{provider.id}"
+      - "{provider.name.family}"
+      - "{provider.name.given[0]}"
+      - "{provider.name.given[1:]}"
+      - "{provider.name.suffix}"
+      - "{provider.name.prefix}"
+      - "{provider.name.degree}"
+      - ""
+      - ""
+      - "PROVID"
+      - ""
+      - ""
+      - ""
+      - "PROVID"
+  - name: hospital service
+    cardinality: 0..1
+    values: 
+      - "TBD"
+  - name: temp location
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: pre admit test
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: re admit indicator
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: admit source
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: ambulatory status
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: vip indicator
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: admitting provider
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: patient type
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: visit number (19)
+    cardinality: 0..1
+    values: 
+      - "{visit.id}"
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: discharge disposition
+    cardinality: 0..1
+    values: 
+      - "{visit.discharge.disposition"
+  - name: discharge destination
+    cardinality: 0..1
+    values: 
+      - "{visit.discharge.destination}"
+  - name: diet type
+    cardinality: 0..1
+    values: 
+      - "{visit.discharge.diet}"
+  - name: visit number (41)
+    cardinality: 0..1
+    values: 
+      - "{visit.status}"
+  - name: pending location
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: prior temp location
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: admit datetime
+    cardinality: 0..1
+    values: 
+      - "{visit.admit.datetime}"
+  - name: discharge datetime
+    cardinality: 0..1
+    values: 
+      - "{visit.discharge.datetime}"
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: total charges
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: alternate visit id
+    cardinality: 0..1
+    values: 
+      - "{visit.id}"
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: unused
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: service episode desc
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: service episode identifier
+    cardinality: 0..0
+    values: 
+      - ""
+  

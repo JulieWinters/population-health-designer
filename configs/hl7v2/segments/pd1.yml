@@ -1,0 +1,77 @@
+id: PD1
+fields:
+  - name: living dependency
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: living arrangement
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: primary facility
+    cardinality: 0..1
+    values: 
+      - "PHD MCC"
+      - ""
+      - "123456"
+  - name: primary provider
+    cardinality: 0..1
+    values: 
+      - "{provider.id}"
+      - "{provider.name.family}"
+      - "{provider.name.given[0]}"
+      - "{provider.name.given[1:]}"
+      - "{provider.name.suffix}"
+      - "{provider.name.prefix}"
+      - "{provider.name.degree}"
+      - ""
+      - ""
+      - "PROVID"
+      - ""
+      - ""
+      - ""
+      - "PROVID"
+  - name: student indicator
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: handicap
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: living will
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: organ donor
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: separate bill
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: duplicate patient
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: publicity code
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: protection indicator
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: protection indicator date
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: place of worship
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: living arrangement
+    cardinality: 0..0
+    values: 
+      - ""

@@ -1,0 +1,48 @@
+id: MSH
+fields:
+  - name: encoding
+    cardinality: 1..1    
+    values: 
+      - "^~\\&"
+  - name: sending app
+    cardinality: 0..1
+    values:
+      - "PHD TESTER"
+      - "ADT_SENDER"
+  - name: sending facility
+    cardinality: 0..1
+    values:
+      - "PHD"
+  - name: receiving app
+    cardinality: 0..1
+    values:
+      - "TEST"
+  - name: receiving facility
+    cardinality: 0..1
+    values: 
+      - ""
+  - name: message timestamp
+    cardinality: 1..1
+    values: 
+      - "{meta.date_time}"
+  - name: security
+    cardinality: 0..0
+    values: 
+      - ""
+  - name: message type
+    cardinality: 1..1
+    values: 
+      - "{meta.msg_type}"
+      - "{meta.msg_trigger}"
+  - name: control id
+    cardinality: 1..1
+    values: 
+      - "{meta.control_id}"
+  - name: processing id
+    cardinality: 1..1
+    values: 
+      - "T"
+  - name: version
+    cardinality: 1..1
+    values: 
+      - "2.5.1"
