@@ -8,13 +8,15 @@ import (
 )
 
 type Diagnosis struct {
-	Name            string   `yaml:"name"`
-	Code            Code     `yaml:"code"`
-	Commonality     float32  `yaml:"commonality"`
-	OnsetAges       []string `yaml:"onset_ages,omitempty"`
-	Mortality       float32  `yaml:"mortality"`
-	MortalityWindow string   `yaml:"mortality_window"`
-	Nature          string   `yaml:"nature"`
+	Name            string            `yaml:"name"`
+	Code            Code              `yaml:"code"`
+	Commonality     float32           `yaml:"commonality"`
+	OnsetAges       []string          `yaml:"onset_ages,omitempty"`
+	Mortality       float32           `yaml:"mortality"`
+	MortalityWindow string            `yaml:"mortality_window"`
+	Nature          string            `yaml:"nature"`
+	Type            string            `yaml:"type"`
+	Details         map[string]string `yaml:"details"`
 }
 
 func (diag *Diagnosis) Manifest(patients []Patient) int {
@@ -34,6 +36,8 @@ func (diag *Diagnosis) Manifest(patients []Patient) int {
 		condition := Condition{}
 		condition.Name = diag.Name
 		condition.Code = diag.Code
+		condition.Type = diag.Type
+		condition.Details = diag.Details
 
 		onsetIndex := config.RandInt(0, len(diag.OnsetAges)-1)
 		l, h := config.SplitRange(diag.OnsetAges[onsetIndex])
@@ -45,6 +49,13 @@ func (diag *Diagnosis) Manifest(patients []Patient) int {
 			h = patAge
 		}
 		condition.OnsetAge = config.RandInt(l, h)
+
+		dob, err := time.Parse("2006-01-02", patients[p].Demographics.Birthdate)
+		if err != nil {
+			panic(err)
+		}
+		dob = dob.AddDate(0, 0, config.RandInt(0, 364))
+		condition.OnsetDate = dob.Format("20060102")
 
 		condition.Terminal = config.RandFloat() <= diag.Mortality
 		if condition.Terminal {

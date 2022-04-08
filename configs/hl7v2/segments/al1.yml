@@ -8,7 +8,7 @@ fields:
   - name: type
     cardinality: 0..1
     values: 
-      - "Unknown"
+      - "{details.category}"
   - name: code
     cardinality: 1..1
     values: 
@@ -20,7 +20,7 @@ fields:
   - name: severity
     cardinality: 0..1
     values: 
-      - "TODO"
+      - "Low"
   - name: reaction
     cardinality: 0..1
     values: 
@@ -28,4 +28,4 @@ fields:
   - name: onset
     cardinality: 0..1
     values: 
-      - "{onset_age}"
+      - "{onset_date}"

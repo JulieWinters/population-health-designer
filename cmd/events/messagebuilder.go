@@ -1,16 +1,18 @@
 package events
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 
 	"github.com/JulieWinters/population-health-designer/internal/config"
 	"github.com/JulieWinters/population-health-designer/internal/modeling"
+	"github.com/JulieWinters/population-health-designer/internal/utils"
 	"github.com/vmware-labs/yaml-jsonpath/pkg/yamlpath"
 	"gopkg.in/yaml.v3"
+	// "gopkg.in/yaml.v3"
 )
-
 
 type MessageBuilder struct {
 	Messages map[string]modeling.MessageDefinition
@@ -68,7 +70,7 @@ func (builder *MessageBuilder) BuildMessage(event Event) (modeling.Hl7v2Message,
 			continue
 		}
 
-		min, max, err := modeling.ParseCardinality(seg.Cardinality)
+		min, max, err := utils.ParseCardinality(seg.Cardinality)
 		if err != nil {
 			return message, err
 		}
@@ -82,6 +84,7 @@ func (builder *MessageBuilder) BuildMessage(event Event) (modeling.Hl7v2Message,
 		}
 
 		var inputNodes []*yaml.Node
+		// inputNodes := event.Data[sDef.DataKey]
 		if sDef.RepetitionKey != "" {
 			path, err := yamlpath.NewPath(sDef.RepetitionKey)
 			if err != nil {
@@ -132,18 +135,21 @@ func (builder *MessageBuilder) BuildMessage(event Event) (modeling.Hl7v2Message,
 						// use the template as-is since the braces are escaped
 						values = append(values, vDef)
 					} else {
-						pathStr := strings.ToLower(vDef[open+1 : close])
-						pathStr = strings.ReplaceAll(pathStr, "[n]", fmt.Sprintf("[%d]", segN))
+						pathStr, function, err := parseDataPath(vDef[open+1:close], segN)
+						if err != nil {
+							return message, err
+						}
+
 						if strings.Index(pathStr, "meta.sequence") == 0 {
 							values = append(values, strconv.Itoa(segN))
-						} else if strings.Index(pathStr, "meta.") == 0 {							
+						} else if strings.Index(pathStr, "meta.") == 0 {
 							value, err := getMetaValue(pathStr, event)
 							if err != nil {
 								return message, err
 							}
 							values = append(values, value)
 						} else {
-							
+
 							path, err := yamlpath.NewPath(pathStr)
 							if err != nil {
 								return message, err
@@ -154,7 +160,11 @@ func (builder *MessageBuilder) BuildMessage(event Event) (modeling.Hl7v2Message,
 								return message, err
 							}
 							for _, node := range nodes {
-								values = append(values, node.Value)
+								value, err := function.processData(node.Value, event)
+								if err != nil {
+									return message, err
+								}
+								values = append(values, value)
 							}
 						}
 					}
@@ -169,6 +179,24 @@ func (builder *MessageBuilder) BuildMessage(event Event) (modeling.Hl7v2Message,
 		}
 	}
 	return message, nil
+}
+
+func parseDataPath(path string, n int) (string, DataFunction, error) {
+	pathStr := strings.ToLower(path)
+	pathStr = strings.ReplaceAll(pathStr, "[n]", fmt.Sprintf("[%d]", n))
+
+	function, err := toDataFunction(pathStr)
+	if err != nil {
+		return "", DataNone, err
+	}
+	return pathStr, function, nil
+}
+
+func (function DataFunction) processData(data string, event Event) (string, error) {
+	if function == Distribution {
+		return "", errors.New("'distribution' data function is not implemented")
+	}
+	return data, nil
 }
 
 func getMetaValue(pathStr string, event Event) (string, error) {

@@ -6,16 +6,36 @@ import (
 	"github.com/JulieWinters/population-health-designer/internal/modeling"
 )
 
-// "strconv"
-
 type Event struct {
-	Id       int               `yaml:"id"`
-	Time     string            `yaml:"time"`
-	Type     string            `yaml:"type"`
-	Event    string            `yaml:"event"`
-	Patient  *modeling.Patient `yaml:"patient"`
-	Provider *modeling.Person  `'yaml:"provider"`
+	Id       int              `yaml:"id"`
+	Time     string           `yaml:"time"`
+	Type     string           `yaml:"type"`
+	Event    string           `yaml:"event"`
+	Patient  modeling.Patient `yaml:"patient"`
+	Provider modeling.Person  `yaml:"provider"`
 }
+
+func NewEvent(id int, time string, typ string, evnt string) Event {
+	event := Event{}
+	event.Id = id
+	event.Time = time
+	event.Type = typ
+	event.Event = evnt
+	event.Patient = modeling.Patient{}
+	event.Patient.Conditions = make([]modeling.Condition, 0)
+	event.Provider = modeling.Person{}
+
+	return event
+}
+
+// func (event *Event) AddData(key modeling.DataSource, node *yaml.Node) {
+// 	if event.Data[key] == nil {
+// 		event.Data[key] = make([]*yaml.Node, 1)
+// 		event.Data[key][0] = node
+// 		return
+// 	}
+// 	event.Data[key] = append(event.Data[key], node)
+// }
 
 func (event *Event) GetMessageKey() string {
 	return fmt.Sprintf("%s^%s", event.Type, event.Event)

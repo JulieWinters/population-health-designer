@@ -16,6 +16,7 @@ const (
 )
 
 func main() {
+
 	args := os.Args[1:]
 	actions, err := GetArgMap(args)
 
@@ -27,7 +28,7 @@ func main() {
 	var message string
 	if val, ok := actions[STATS]; ok {
 		err := stats.Execute(val)
-		if err != nil {			
+		if err != nil {
 			fmt.Printf("Failed in Population Statistics step: %v\n", err)
 			return
 		}

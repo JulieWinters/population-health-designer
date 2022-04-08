@@ -3,6 +3,7 @@ diagnoses:
     code:
       system: ICD10
       value: K35
+      description: appendicitis
     commonality: .5
     onset_ages:
       - 5+
@@ -14,9 +15,24 @@ diagnoses:
     code:
       system: ICD10
       value: H10.33
+      description: conjunctivitis
     commonality: .1
     onset_ages:
       - 0+
     mortality: .0
     nature: reoccurring
     type: problem
+  - name: bee venom
+    code:
+      system: PHD
+      value: A-0001
+      description: BEE VENOM
+    commonality: .99
+    onset_ages:
+      - 0+
+    mortality: .0
+    nature: reoccurring
+    type: 'allergy'
+    details:
+      category: Environ
+

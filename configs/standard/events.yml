@@ -12,3 +12,20 @@ segments:
   - "./configs/hl7v2/segments/zpd.yml"
 messages:
   - "./configs/hl7v2/adt_a01.yml"
+  - "./configs/hl7v2/adt_a08.yml"
+event_definitions:
+  - name: allergies
+    message_type: ADT
+    message_event: A08
+    cardinality: 0..*
+    triggers: 
+      - "conditions[?(@.type=='allergy')]"
+    when:
+        field: onset_date
+        mask: "________HHmmss"
+        format: "yyyyMMdd"
+    data_sources:
+      - type: patient
+        filter: demographics
+      - type: patient
+        filter: "conditions[?(@.type=='allergy')]"

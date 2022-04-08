@@ -4,7 +4,7 @@ inherit:
   - ./configs/standard/diagnoses.yml
 rules:
   counts:
-    patients: 10
+    patients: 10000000
     providers: 0    
   output: ./bin/patients.yml
 identifiers:
@@ -20,12 +20,6 @@ distributions:
   ethnicity:
     hispanic_or_latino: .33
     non_hispanic_or_latino: .67
-  sexuality:
-      homosexual: .0165
-      bisexual: .018
-  gender_identity:
-    trans: .00198
-    nonbinary: .00099
   ages:
     0-4: .068
     5-17: .189

@@ -75,6 +75,40 @@ func RandInt64(l int64, h int64) int64 {
 	return rand.Int63n(h-l) + l
 }
 
+func RandMaskedTime(input string, mask string) string {
+	value := strings.Builder{}
+	for i := 0; i < len(mask); i++ {
+		if mask[i] == '_' {
+			if i < len(input) {
+				value.WriteByte(input[i])
+			}
+		} else {
+			if i+1 < len(mask) {
+				if mask[i] == 'H' && mask[i+1] == 'H' {
+					hour := strconv.Itoa(RandInt(0, 24))
+					i++
+					value.WriteString(hour)
+				} else if mask[i] == 'h' && mask[i+1] == 'h' {
+					hour := strconv.Itoa(RandInt(0, 12) + 1)
+					i++
+					value.WriteString(hour)
+				} else if mask[i] == 'm' && mask[i+1] == 'm' {
+					min := strconv.Itoa(RandInt(0, 59))
+					i++
+					value.WriteString(min)
+				} else if mask[i] == 's' && mask[i+1] == 's' {
+					sec := strconv.Itoa(RandInt(0, 59))
+					i++
+					value.WriteString(sec)
+				} else {
+					value.WriteByte(mask[i])
+				}
+			}
+		}
+	}
+	return value.String()
+}
+
 func RandMaskValue(mask string) string {
 	value := ""
 	for _, c := range mask {
